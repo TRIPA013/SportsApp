@@ -1,17 +1,32 @@
 package com.aa.sportstree.sportstree;
 
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AbsoluteLayout;
+import android.widget.FrameLayout;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements TeamsFragment.OnFragmentInteractionListener {
+
+    private final String TAG = ((Object) this).getClass().getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        Log.e(TAG, "+++ In onCreate() +++");
+        initFragment(new TeamsFragment());
+    }
+
+    protected void initFragment(Fragment fragment) {
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(android.R.id.content, fragment);
+        fragmentTransaction.commit();
     }
 
 
@@ -33,4 +48,39 @@ public class MainActivity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onFragmentInteraction(String id) {
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Log.e(TAG, "++ In onResume() ++");
+        // Rest of onResume()...
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Log.e(TAG, "++ In onPause() ++");
+        // Rest of onResume()...
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        Log.e(TAG, "++ In onFinish() ++");
+        // Rest of onResume()...
+    }
+
+    @Override
+    public void onRestart() {
+        super.onRestart();
+        Log.e(TAG, "++ In onRestart() ++");
+        // Rest of onResume()...
+    }
+
+
 }
