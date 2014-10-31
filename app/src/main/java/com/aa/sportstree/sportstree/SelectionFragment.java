@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 
 import com.aa.sportstree.sportstree.dummy.DummyContent;
+import com.aa.sportstree.sportstree.pojos.SelectionType;
 
 /**
  * A fragment representing a list of Items.
@@ -24,7 +25,9 @@ import com.aa.sportstree.sportstree.dummy.DummyContent;
  * Activities containing this fragment MUST implement the {@link Callbacks}
  * interface.
  */
-public class TeamsFragment extends Fragment implements AbsListView.OnItemClickListener {
+public class SelectionFragment extends Fragment implements AbsListView.OnItemClickListener {
+
+    private SelectionType selectionType;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -49,8 +52,8 @@ public class TeamsFragment extends Fragment implements AbsListView.OnItemClickLi
     private ListAdapter mAdapter;
 
     // TODO: Rename and change types of parameters
-    public static TeamsFragment newInstance(String param1, String param2) {
-        TeamsFragment fragment = new TeamsFragment();
+    public static SelectionFragment newInstance(String param1, String param2) {
+        SelectionFragment fragment = new SelectionFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -62,7 +65,7 @@ public class TeamsFragment extends Fragment implements AbsListView.OnItemClickLi
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-    public TeamsFragment() {
+    public SelectionFragment() {
     }
 
     @Override

@@ -2,18 +2,15 @@ package com.aa.sportstree.sportstree;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.AbsoluteLayout;
-import android.widget.FrameLayout;
 
 
-public class MainActivity extends Activity implements TeamsFragment.OnFragmentInteractionListener {
+public class MainActivity extends Activity implements SelectionFragment.OnFragmentInteractionListener {
 
     private final String TAG = ((Object) this).getClass().getSimpleName();
 
@@ -23,10 +20,11 @@ public class MainActivity extends Activity implements TeamsFragment.OnFragmentIn
         Log.e(TAG, "+++ In onCreate() +++");
         Intent login = new Intent(this, LoginActivity.class);
         startActivity(login);
-        //initFragment(new TeamsFragment());
+        //initFragment(new SelectionFragment());
     }
 
     protected void initFragment(Fragment fragment) {
+        fragment.setArguments(new Bundle());
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.replace(android.R.id.content, fragment);
         fragmentTransaction.commit();
