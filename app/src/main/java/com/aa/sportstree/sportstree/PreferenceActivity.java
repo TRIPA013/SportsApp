@@ -21,7 +21,7 @@ public class PreferenceActivity extends Activity {
         setContentView(R.layout.activity_preference);
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
+                    .add(R.id.container, new SelectionFragment())
                     .commit();
         }
     }
