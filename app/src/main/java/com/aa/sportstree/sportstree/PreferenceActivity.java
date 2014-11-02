@@ -13,7 +13,7 @@ import android.os.Build;
 
 
 
-public class PreferenceActivity extends Activity {
+public class PreferenceActivity extends Activity implements SelectionFragment.OnFragmentInteractionListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +44,11 @@ public class PreferenceActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onFragmentInteraction(String id) {
+
     }
 
     /**
