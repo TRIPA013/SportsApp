@@ -1,6 +1,9 @@
 package com.aa.sportstree.sportstree;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -22,7 +25,7 @@ import com.aa.sportstree.sportstree.pojos.SelectionType;
  * Large screen devices (such as tablets) are supported by replacing the ListView
  * with a GridView.
  * <p />
- * Activities containing this fragment MUST implement the {@link Callbacks}
+ * Activities containing this fragment MUST implement the {@link }
  * interface.
  */
 public class SelectionFragment extends Fragment implements AbsListView.OnItemClickListener {
@@ -116,12 +119,18 @@ public class SelectionFragment extends Fragment implements AbsListView.OnItemCli
     }
 
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if (null != mListener) {
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
             mListener.onFragmentInteraction(DummyContent.ITEMS.get(position).id);
+
+            Drawable drawable = view.getResources().getDrawable(R.drawable.abc_ab_solid_light_holo);
+
+            view.setBackground(drawable);
+
         }
     }
 

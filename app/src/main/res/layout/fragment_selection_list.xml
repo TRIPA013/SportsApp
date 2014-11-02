@@ -7,13 +7,11 @@
 
     <ListView
         android:id="@android:id/list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-    <TextView
-        android:id="@android:id/empty"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center" />
+        android:layout_width="289dp"
+        android:layout_height="325dp"
+        android:layout_gravity="center"
+        android:fastScrollEnabled="true"
+        android:fastScrollAlwaysVisible="false"
+        android:focusableInTouchMode="true" />
 
 </FrameLayout>
