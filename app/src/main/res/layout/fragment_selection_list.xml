@@ -5,13 +5,32 @@
     android:layout_height="match_parent"
     tools:context="com.aa.sportstree.sportstree.SelectionFragment">
 
-    <ListView
-        android:id="@android:id/list"
-        android:layout_width="289dp"
-        android:layout_height="325dp"
-        android:layout_gravity="center"
-        android:fastScrollEnabled="true"
-        android:fastScrollAlwaysVisible="false"
-        android:focusableInTouchMode="true" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="left|top"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/selectTeams"
+            android:layout_width="383dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|top"
+            android:editable="false"
+            android:text="Select Favorite Teams" />
+
+        <ListView
+            android:id="@android:id/list"
+            android:layout_width="match_parent"
+            android:layout_height="452dp"
+            android:layout_gravity="center"
+            android:fastScrollAlwaysVisible="false"
+            android:fastScrollEnabled="true"
+            android:focusableInTouchMode="true" />
+
+
+
+    </LinearLayout>
 
 </FrameLayout>

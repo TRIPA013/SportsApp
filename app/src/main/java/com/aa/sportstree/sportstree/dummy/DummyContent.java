@@ -28,6 +28,17 @@ public class DummyContent {
         addItem(new DummyItem("1", "Ohio State Buckeyes"));
         addItem(new DummyItem("2", "Purdue Boilermakers"));
         addItem(new DummyItem("3", "USC Trojans"));
+        addItem(new DummyItem("4", "Ohio State Buckeyes"));
+        addItem(new DummyItem("5", "Purdue Boilermakers"));
+        addItem(new DummyItem("6", "USC Trojans"));
+        addItem(new DummyItem("7", "Ohio State Buckeyes"));
+        addItem(new DummyItem("8", "Purdue Boilermakers"));
+        addItem(new DummyItem("9", "USC Trojans"));
+        addItem(new DummyItem("10", "Ohio State Buckeyes"));
+        addItem(new DummyItem("11", "Purdue Boilermakers"));
+        addItem(new DummyItem("12", "USC Trojans"));
+
+
     }
 
     private static void addItem(DummyItem item) {

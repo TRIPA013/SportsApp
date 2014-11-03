@@ -19,12 +19,15 @@ import android.widget.TextView;
 import com.aa.sportstree.sportstree.dummy.DummyContent;
 import com.aa.sportstree.sportstree.pojos.SelectionType;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * A fragment representing a list of Items.
- * <p />
+ * <p/>
  * Large screen devices (such as tablets) are supported by replacing the ListView
  * with a GridView.
- * <p />
+ * <p/>
  * Activities containing this fragment MUST implement the {@link }
  * interface.
  */
@@ -108,7 +111,7 @@ public class SelectionFragment extends Fragment implements AbsListView.OnItemCli
             mListener = (OnFragmentInteractionListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
-                + " must implement OnFragmentInteractionListener");
+                    + " must implement OnFragmentInteractionListener");
         }
     }
 
@@ -118,6 +121,9 @@ public class SelectionFragment extends Fragment implements AbsListView.OnItemCli
         mListener = null;
     }
 
+    public static boolean click = false;
+
+    Map<Integer, Boolean> itemIsSelected = new HashMap<Integer, Boolean>();
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
@@ -126,11 +132,20 @@ public class SelectionFragment extends Fragment implements AbsListView.OnItemCli
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
             mListener.onFragmentInteraction(DummyContent.ITEMS.get(position).id);
-
-            Drawable drawable = view.getResources().getDrawable(R.drawable.abc_ab_solid_light_holo);
-
-            view.setBackground(drawable);
-
+            if (itemIsSelected.containsKey(position)) {
+                if (!itemIsSelected.get(position)) {
+                    Drawable drawable = view.getResources().getDrawable(R.drawable.abc_ab_solid_light_holo);
+                    view.setBackground(drawable);
+                    itemIsSelected.put(position, true);
+                } else {
+                    view.setBackground(null);
+                    itemIsSelected.put(position, false);
+                }
+            } else {
+                itemIsSelected.put(position, true);
+                Drawable drawable = view.getResources().getDrawable(R.drawable.abc_ab_solid_light_holo);
+                view.setBackground(drawable);
+            }
         }
     }
 
@@ -148,15 +163,15 @@ public class SelectionFragment extends Fragment implements AbsListView.OnItemCli
     }
 
     /**
-    * This interface must be implemented by activities that contain this
-    * fragment to allow an interaction in this fragment to be communicated
-    * to the activity and potentially other fragments contained in that
-    * activity.
-    * <p>
-    * See the Android Training lesson <a href=
-    * "http://developer.android.com/training/basics/fragments/communicating.html"
-    * >Communicating with Other Fragments</a> for more information.
-    */
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     * <p/>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         public void onFragmentInteraction(String id);
