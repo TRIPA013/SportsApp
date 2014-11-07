@@ -16,6 +16,7 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 
 
+import com.aa.sportstree.sportstree.constants.ApplicationConstants;
 import com.aa.sportstree.sportstree.dummy.DummyContent;
 import com.aa.sportstree.sportstree.pojos.SelectionType;
 
@@ -78,15 +79,22 @@ public class SelectionFragment extends Fragment implements AbsListView.OnItemCli
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
         // TODO: Change Adapter to display your content
+        if(getArguments().getInt(ApplicationConstants.FRAGMENT_TYPE)==SelectionType.Sports.getValue()){
+            mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
+                    android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS_SPORTS);
 
-        mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
-                android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS);
+        }
+        else {
+            mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
+                    android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS_TEAMS);
+        }
     }
 
     @Override
@@ -100,6 +108,23 @@ public class SelectionFragment extends Fragment implements AbsListView.OnItemCli
 
         // Set OnItemClickListener so we can be notified on item clicks
         mListView.setOnItemClickListener(this);
+
+
+
+        TextView btn=(TextView)view.findViewById(R.id.continueButton);
+        btn.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if(getArguments().getInt(ApplicationConstants.FRAGMENT_TYPE)==SelectionType.Sports.getValue()){
+                    ((PreferenceActivity)getActivity()).onContinueClicked(SelectionType.Sports);
+                }
+                else {
+                    ((PreferenceActivity)getActivity()).onContinueClicked(SelectionType.Teams);
+
+                }
+                     }
+        });
 
         return view;
     }
@@ -131,7 +156,7 @@ public class SelectionFragment extends Fragment implements AbsListView.OnItemCli
         if (null != mListener) {
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
-            mListener.onFragmentInteraction(DummyContent.ITEMS.get(position).id);
+            //mListener.onFragmentInteraction(DummyContent.ITEMS.get(position).id);
             if (itemIsSelected.containsKey(position)) {
                 if (!itemIsSelected.get(position)) {
                     Drawable drawable = view.getResources().getDrawable(R.drawable.abc_ab_solid_light_holo);
@@ -176,5 +201,7 @@ public class SelectionFragment extends Fragment implements AbsListView.OnItemCli
         // TODO: Update argument type and name
         public void onFragmentInteraction(String id);
     }
+
+
 
 }

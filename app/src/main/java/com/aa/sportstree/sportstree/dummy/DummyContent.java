@@ -16,12 +16,25 @@ public class DummyContent {
     /**
      * An array of sample (dummy) items.
      */
-    public static List<DummyItem> ITEMS = new ArrayList<DummyItem>();
+    public static List<DummyItem> ITEMS_TEAMS = new ArrayList<DummyItem>();
+
+
+    /**
+     * An array of sample (dummy) items.
+     */
+    public static List<DummyItem> ITEMS_SPORTS = new ArrayList<DummyItem>();
+
 
     /**
      * A map of sample (dummy) items, by ID.
      */
-    public static Map<String, DummyItem> ITEM_MAP = new HashMap<String, DummyItem>();
+    public static Map<String, DummyItem> ITEM_TEAMS_MAP = new HashMap<String, DummyItem>();
+
+
+    /**
+     * A map of sample (dummy) items, by ID.
+     */
+    public static Map<String, DummyItem> ITEM_SPORTS_MAP = new HashMap<String, DummyItem>();
 
     static {
         // Add 3 sample items.
@@ -39,11 +52,25 @@ public class DummyContent {
         addItem(new DummyItem("12", "USC Trojans"));
 
 
+
+        addSportsItem(new DummyItem("1", "Football"));
+        addSportsItem(new DummyItem("2", "Soccer"));
+        addSportsItem(new DummyItem("3", "Baseball"));
+        addSportsItem(new DummyItem("4", "Basketball"));
+        addSportsItem(new DummyItem("5", "Tennis"));
+
+
     }
 
     private static void addItem(DummyItem item) {
-        ITEMS.add(item);
-        ITEM_MAP.put(item.id, item);
+        ITEMS_TEAMS .add(item);
+        ITEM_TEAMS_MAP.put(item.id, item);
+    }
+
+
+    private static void addSportsItem(DummyItem item) {
+        ITEMS_SPORTS .add(item);
+        ITEM_SPORTS_MAP.put(item.id, item);
     }
 
     /**

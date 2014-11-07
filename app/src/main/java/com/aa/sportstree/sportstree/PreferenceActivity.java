@@ -3,6 +3,8 @@ package com.aa.sportstree.sportstree;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -11,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
 
+import com.aa.sportstree.sportstree.constants.ApplicationConstants;
+import com.aa.sportstree.sportstree.pojos.SelectionType;
 
 
 public class PreferenceActivity extends Activity implements SelectionFragment.OnFragmentInteractionListener{
@@ -22,9 +26,17 @@ public class PreferenceActivity extends Activity implements SelectionFragment.On
         setTitle("Preferences");
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
-                    .add(R.id.container, new SelectionFragment())
+                    .add(R.id.container, getFragmentInstance(SelectionType.Sports))
                     .commit();
         }
+    }
+
+    private Fragment getFragmentInstance(SelectionType selectionType) {
+        SelectionFragment selectionFragment = new SelectionFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt(ApplicationConstants.FRAGMENT_TYPE, selectionType.getValue());
+        selectionFragment.setArguments(bundle);
+        return selectionFragment;
     }
 
 
@@ -66,5 +78,22 @@ public class PreferenceActivity extends Activity implements SelectionFragment.On
             View rootView = inflater.inflate(R.layout.fragment_preference, container, false);
             return rootView;
         }
+    }
+
+    public void onContinueClicked(SelectionType selectionType){
+        switch(selectionType){
+            case Teams:
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+                break;
+            case Sports:
+                Fragment newFragment = getFragmentInstance(SelectionType.Teams);
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.container, newFragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
+                break;
+        }
+
     }
 }
