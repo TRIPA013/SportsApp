@@ -13,7 +13,7 @@ import android.os.Build;
 
 
 
-public class NewsActivity extends Activity {
+public class NewsActivity extends Activity implements NewsFeedItemFragment.OnFragmentInteractionListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +21,7 @@ public class NewsActivity extends Activity {
         setContentView(R.layout.activity_news);
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
+                    .add(R.id.container, new NewsFeedItemFragment())
                     .commit();
         }
     }
@@ -44,6 +44,11 @@ public class NewsActivity extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onFragmentInteraction(String id) {
+
     }
 
     /**

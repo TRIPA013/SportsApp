@@ -83,7 +83,7 @@ public class PreferenceActivity extends Activity implements SelectionFragment.On
     public void onContinueClicked(SelectionType selectionType){
         switch(selectionType){
             case Teams:
-                Intent intent = new Intent(this, MainActivity.class);
+                Intent intent = new Intent(this, NewsActivity.class);
                 startActivity(intent);
                 break;
             case Sports:
