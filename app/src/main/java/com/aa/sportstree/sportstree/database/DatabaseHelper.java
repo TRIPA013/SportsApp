@@ -20,7 +20,7 @@ public class DatabaseHelper {
 
     public DatabaseHelper(Context context) {
         this.context = context;
-        TicTacToeOpenHelper openHelper = new TicTacToeOpenHelper(this.context);
+        SportsTreeOpenHelper openHelper = new SportsTreeOpenHelper(this.context);
         this.db = openHelper.getWritableDatabase();
         this.insertStmt = this.db.compileStatement(INSERT);
     }
@@ -50,15 +50,33 @@ public class DatabaseHelper {
         return list;
     }
 
-    private static class TicTacToeOpenHelper extends SQLiteOpenHelper {
-        TicTacToeOpenHelper(Context context) {
+    private static class SportsTreeOpenHelper extends SQLiteOpenHelper {
+        public static String SPORTS_TABLE="SportsTable";
+
+        public static String TEAMS_TABLE="SportsTable";
+
+        SportsTreeOpenHelper(Context context) {
             super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        }
+
+
+        public void insertIntoTable(String tableName, String information){
+
+        }
+
+        public void linkTogether(String table1, String table2, String s, String s1) {
+
         }
 
         @Override
         public void onCreate(SQLiteDatabase db) {
             db.execSQL("CREATE TABLE " + TABLE_NAME + "(id INTEGER PRIMARY KEY, name TEXT, password TEXT)");
+            insertIntoTable(SPORTS_TABLE,"Football");
+            insertIntoTable(TEAMS_TABLE,"Ohio State Football");
+            linkTogether(SPORTS_TABLE,TEAMS_TABLE,"","");
         }
+
+
 
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
