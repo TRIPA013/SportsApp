@@ -13,6 +13,9 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import org.json.*;
+import com.google.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 
 /**
@@ -33,13 +36,13 @@ public class FileUtil {
         return teams;
     }
 
-    public static void storeSharedPreferences(List<String> sports) {
-        Context context = null; //placeholder
+    public static void storeSharedPreferences(Context context, List<String> sports) {
         SharedPreferences prefs = context.getSharedPreferences("settings", Context.MODE_PRIVATE);
         String value = prefs.getString("list", null);
 
-        //GsonBuilder gsonb = new GsonBuilder();
-        //Gson gson = gsonb.create();
-        //MyObject[] list = gson.fromJson(value, MyObject[].class);
+        GsonBuilder gsonb = new GsonBuilder();
+        Gson gson = gsonb.create();
+        Team[] list = gson.fromJson(value, Team[].class);
+        Sport[] listSport = gson.fromJson(value, Sport[].class);
     }
 }
