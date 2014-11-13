@@ -44,4 +44,9 @@ public class Sport {
     public void setTeams(List<Team> teams) {
         this.teams = teams;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

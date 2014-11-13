@@ -17,8 +17,10 @@ import android.widget.TextView;
 
 
 import com.aa.sportstree.sportstree.constants.ApplicationConstants;
+import com.aa.sportstree.sportstree.dummy.DataInitializer;
 import com.aa.sportstree.sportstree.dummy.DummyContent;
 import com.aa.sportstree.sportstree.pojos.SelectionType;
+import com.aa.sportstree.sportstree.pojos.Sport;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -87,8 +89,15 @@ public class SelectionFragment extends Fragment implements AbsListView.OnItemCli
 
         // TODO: Change Adapter to display your content
         if(getArguments().getInt(ApplicationConstants.FRAGMENT_TYPE)==SelectionType.Sports.getValue()){
-            mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
-                    android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS_SPORTS);
+
+            //Map<String, String> sportMap = new HashMap<String, String>();
+
+            //for(Sport sport: DataInitializer.sports){
+             //   sportMap.put(sport.getId(),sport.getName());
+            //}
+
+            mAdapter = new ArrayAdapter<Sport>(getActivity(),
+                    android.R.layout.simple_list_item_1, android.R.id.text1,DataInitializer.sports);
 
         }
         else {

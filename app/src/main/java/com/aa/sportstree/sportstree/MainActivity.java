@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.aa.sportstree.sportstree.dummy.DataInitializer;
+
 
 public class MainActivity extends Activity implements SelectionFragment.OnFragmentInteractionListener {
 
@@ -18,6 +20,12 @@ public class MainActivity extends Activity implements SelectionFragment.OnFragme
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.e(TAG, "+++ In onCreate() +++");
+        try {
+            DataInitializer.initializeAllSports(getBaseContext());
+        }
+        catch(Exception e){
+
+        }
         Intent login = new Intent(this, LoginActivity.class);
         startActivity(login);
         //initFragment(new SelectionFragment());
