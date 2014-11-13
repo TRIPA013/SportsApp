@@ -21,6 +21,26 @@ public class DataInitializer {
 
     public static List<Sport> sports;
 
+    public static List<Sport> selectedSports;
+
+    public static List<Team> teams;
+
+    public static List<Team> selectedTeams;
+
+
+    public static void setSelectedSports(List<Sport> sports){
+        selectedSports = sports;
+        teams = new ArrayList<Team>();
+        for(Sport sport: selectedSports){
+            teams.addAll(sport.getTeams());
+        }
+    }
+
+    public static void setSelectedTeams(List<Team> teams){
+        selectedTeams = teams;
+    }
+
+
     public static void initializeAllSports(Context context) throws IOException {
         sports = new ArrayList<Sport>();
         AssetManager assetManager = context.getResources().getAssets();

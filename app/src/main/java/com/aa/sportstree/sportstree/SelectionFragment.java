@@ -21,8 +21,11 @@ import com.aa.sportstree.sportstree.dummy.DataInitializer;
 import com.aa.sportstree.sportstree.dummy.DummyContent;
 import com.aa.sportstree.sportstree.pojos.SelectionType;
 import com.aa.sportstree.sportstree.pojos.Sport;
+import com.aa.sportstree.sportstree.pojos.Team;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -101,8 +104,8 @@ public class SelectionFragment extends Fragment implements AbsListView.OnItemCli
 
         }
         else {
-            mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
-                    android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS_TEAMS);
+            mAdapter = new ArrayAdapter<Team>(getActivity(),
+                    android.R.layout.simple_list_item_1, android.R.id.text1, DataInitializer.teams);
         }
     }
 
@@ -126,9 +129,28 @@ public class SelectionFragment extends Fragment implements AbsListView.OnItemCli
             @Override
             public void onClick(View v) {
                 if(getArguments().getInt(ApplicationConstants.FRAGMENT_TYPE)==SelectionType.Sports.getValue()){
+                    List<Sport> selectedSports = new ArrayList<Sport>();
+                    for(Map.Entry<Integer,Boolean> entry: itemIsSelected.entrySet()) {
+                        if(entry.getValue()) {
+                            Sport sport =(Sport) mAdapter.getItem(entry.getKey());
+                            selectedSports.add(sport);
+                        }
+                    }
+                    DataInitializer.setSelectedSports(selectedSports);
                     ((PreferenceActivity)getActivity()).onContinueClicked(SelectionType.Sports);
+
+
                 }
                 else {
+
+                    List<Team> selectedTeams = new ArrayList<Team>();
+                    for(Map.Entry<Integer,Boolean> entry: itemIsSelected.entrySet()) {
+                        if(entry.getValue()) {
+                            Team team =(Team) mAdapter.getItem(entry.getKey());
+                            selectedTeams.add(team);
+                        }
+                    }
+                    DataInitializer.setSelectedTeams(selectedTeams);
                     ((PreferenceActivity)getActivity()).onContinueClicked(SelectionType.Teams);
 
                 }
