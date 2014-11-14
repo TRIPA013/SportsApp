@@ -1,8 +1,12 @@
 package com.aa.sportstree.sportstree.util;
 
 import android.content.Context;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 
+import com.aa.sportstree.sportstree.NewsFeedItemFragment;
 import com.aa.sportstree.sportstree.constants.ApplicationConstants;
+import com.aa.sportstree.sportstree.pojos.NewsItem;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -10,7 +14,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
@@ -26,7 +33,7 @@ public class VolleyUtil {
         }
     }
 
-    public static void getContentFromFaroo(String query) {
+    public static void getContentFromFaroo(final NewsItem newsItem, String query, final NewsFeedItemFragment mAdapter) {
 
         String url = ApplicationConstants.URL.replace(ApplicationConstants.QUES,query.replace(" ","+"));
         JsonObjectRequest jsonObjectRequest =
@@ -35,7 +42,7 @@ public class VolleyUtil {
 
                     @Override
                     public void onResponse(JSONObject response) {
-                        System.out.println("");
+                        getNewsItemFromJSONResponse(newsItem, response,mAdapter);
                     }
                 }, new Response.ErrorListener() {
                     @Override
@@ -45,6 +52,23 @@ public class VolleyUtil {
                 });
         requestQueue.add(jsonObjectRequest);
 
+    }
+
+
+    public static NewsItem getNewsItemFromJSONResponse(NewsItem newsItem, JSONObject response, NewsFeedItemFragment mAdapter){
+        try {
+            String result =response.getString("results");
+            JSONObject jsonObject =((JSONObject)(((JSONArray) response.get("results")).get(0)));
+            String title = jsonObject.getString("title");
+            String newsURL = jsonObject.getString("url");
+            String imageURL = jsonObject.getString("iurl");
+            newsItem.setContent(title);
+            ((ArrayAdapter)mAdapter.mAdapter).notifyDataSetChanged();
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 

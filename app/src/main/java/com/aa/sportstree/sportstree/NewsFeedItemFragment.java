@@ -49,7 +49,7 @@ public class NewsFeedItemFragment extends ListFragment implements AbsListView.On
      * The Adapter which will be used to populate the ListView/GridView with
      * Views.
      */
-    private ListAdapter mAdapter;
+    public ListAdapter mAdapter;
 
     // TODO: Rename and change types of parameters
     public static NewsFeedItemFragment newInstance(String param1, String param2) {
@@ -77,15 +77,10 @@ public class NewsFeedItemFragment extends ListFragment implements AbsListView.On
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        List<NewsItem> newsItems=NewsUtil.getNewsList();
-        setListAdapter(new ArrayAdapter<NewsItem>(getActivity(), R.layout.row,
-                R.id.text2,newsItems ));
-
-       // for()
-
-        // TODO: Change Adapter to display your content
-//        mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
-//                android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS_SPORTS);
+        List<NewsItem> newsItems=NewsUtil.getNewsList(this);
+        mAdapter = new ArrayAdapter<NewsItem>(getActivity(), R.layout.row,
+                R.id.text2, newsItems);
+        setListAdapter(mAdapter);
     }
 
     @Override
@@ -123,6 +118,9 @@ public class NewsFeedItemFragment extends ListFragment implements AbsListView.On
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if (null != mListener) {
+
+
+
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
 //            mListener.onFragmentInteraction(DummyContent.ITEMS.get(position).id);

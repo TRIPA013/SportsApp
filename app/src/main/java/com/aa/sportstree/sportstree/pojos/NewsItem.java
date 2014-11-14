@@ -9,6 +9,24 @@ public class NewsItem {
     private Team team;
     private String imageURL;
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
+
+    private String url;
+
     //maybe an image
     public NewsItem(String id, String content, Team team, String imageURL) {
         this.id = id;

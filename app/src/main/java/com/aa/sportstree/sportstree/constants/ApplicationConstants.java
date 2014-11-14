@@ -8,5 +8,5 @@ public class ApplicationConstants {
 
     public static String QUES ="ques";
 
-    public static String URL ="http://www.faroo.com/api?q="+QUES+"&start=1&length=1&l=en&src=web&i=false&f=json&key=aQRygCBJHRtQAs9JyzivF4N5vQs_";
+    public static String URL ="http://www.faroo.com/api?q="+QUES+"&start=1&length=1&l=en&src=news&i=false&f=json&key=aQRygCBJHRtQAs9JyzivF4N5vQs_";
 }
