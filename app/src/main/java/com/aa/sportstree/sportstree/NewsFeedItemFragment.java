@@ -13,8 +13,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
-
-import com.aa.sportstree.sportstree.dummy.DummyContent;
+import com.aa.sportstree.sportstree.pojos.NewsItem;
+import com.aa.sportstree.sportstree.util.NewsUtil;
 
 /**
  * A fragment representing a list of Items.
@@ -77,20 +77,14 @@ public class NewsFeedItemFragment extends ListFragment implements AbsListView.On
 
 
 
-        setListAdapter(new ArrayAdapter<String>(getActivity(), R.layout.row,
-                R.id.text2, SmartPhones));
+        setListAdapter(new ArrayAdapter<NewsItem>(getActivity(), R.layout.row,
+                R.id.text2, NewsUtil.getNewsList()));
 
         // TODO: Change Adapter to display your content
 //        mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
 //                android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS_SPORTS);
     }
 
-    static final String[] SmartPhones = new String[] {
-            "HTC Rezound",  "Samsung Galaxy S II Skyrocket",
-            "Samsung Galaxy Nexus", "Motorola Droid Razr",
-            "Samsung Galaxy S", "Samsung Epic Touch 4G",
-            "iPhone 4S", "HTC Titan"
-    };
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

@@ -18,7 +18,6 @@ import android.widget.TextView;
 
 import com.aa.sportstree.sportstree.constants.ApplicationConstants;
 import com.aa.sportstree.sportstree.dummy.DataInitializer;
-import com.aa.sportstree.sportstree.dummy.DummyContent;
 import com.aa.sportstree.sportstree.pojos.SelectionType;
 import com.aa.sportstree.sportstree.pojos.Sport;
 import com.aa.sportstree.sportstree.pojos.Team;
@@ -46,9 +45,6 @@ public class SelectionFragment extends Fragment implements AbsListView.OnItemCli
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
@@ -66,10 +62,6 @@ public class SelectionFragment extends Fragment implements AbsListView.OnItemCli
     // TODO: Rename and change types of parameters
     public static SelectionFragment newInstance(String param1, String param2) {
         SelectionFragment fragment = new SelectionFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
         return fragment;
     }
 
@@ -85,22 +77,19 @@ public class SelectionFragment extends Fragment implements AbsListView.OnItemCli
         super.onCreate(savedInstanceState);
 
 
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
 
         // TODO: Change Adapter to display your content
         if(getArguments().getInt(ApplicationConstants.FRAGMENT_TYPE)==SelectionType.Sports.getValue()){
-
-            //Map<String, String> sportMap = new HashMap<String, String>();
-
-            //for(Sport sport: DataInitializer.sports){
-             //   sportMap.put(sport.getId(),sport.getName());
-            //}
-
             mAdapter = new ArrayAdapter<Sport>(getActivity(),
                     android.R.layout.simple_list_item_1, android.R.id.text1,DataInitializer.sports);
+
+            if(DataInitializer.selectedSports!=null){
+                for(Sport sport: DataInitializer.selectedSports){
+                    int position =((ArrayAdapter<Sport>)mAdapter).getPosition(sport);
+
+                    itemIsSelected.put(position,true);
+                }
+            }
 
         }
         else {
@@ -138,8 +127,6 @@ public class SelectionFragment extends Fragment implements AbsListView.OnItemCli
                     }
                     DataInitializer.setSelectedSports(selectedSports);
                     ((PreferenceActivity)getActivity()).onContinueClicked(SelectionType.Sports);
-
-
                 }
                 else {
 

@@ -7,11 +7,14 @@ public class NewsItem {
     private String id;
     private String content;
     private Team team;
+    private String imageURL;
+
     //maybe an image
-    public NewsItem(String id, String content, Team team) {
+    public NewsItem(String id, String content, Team team, String imageURL) {
         this.id = id;
         this.content = content;
         this.team = team;
+        this.imageURL = imageURL;
     }
 
     public String getId() {
@@ -36,5 +39,10 @@ public class NewsItem {
 
     public void setTeam(Team team) {
         this.team = team;
+    }
+
+    @Override
+    public String toString() {
+        return content;
     }
 }
