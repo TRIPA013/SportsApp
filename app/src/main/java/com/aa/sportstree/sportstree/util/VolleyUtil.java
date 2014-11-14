@@ -6,8 +6,6 @@ package com.aa.sportstree.sportstree.util;
 public class VolleyUtil {
 
 
-
-
-
+    //RequestQueue requestQueue;
 
 }

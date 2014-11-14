@@ -16,6 +16,8 @@ import android.widget.TextView;
 import com.aa.sportstree.sportstree.pojos.NewsItem;
 import com.aa.sportstree.sportstree.util.NewsUtil;
 
+import java.util.List;
+
 /**
  * A fragment representing a list of Items.
  * <p />
@@ -75,10 +77,11 @@ public class NewsFeedItemFragment extends ListFragment implements AbsListView.On
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-
-
+        List<NewsItem> newsItems=NewsUtil.getNewsList();
         setListAdapter(new ArrayAdapter<NewsItem>(getActivity(), R.layout.row,
-                R.id.text2, NewsUtil.getNewsList()));
+                R.id.text2,newsItems ));
+
+       // for()
 
         // TODO: Change Adapter to display your content
 //        mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
