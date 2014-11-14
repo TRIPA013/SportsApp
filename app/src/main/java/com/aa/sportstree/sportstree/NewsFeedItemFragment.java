@@ -2,6 +2,8 @@ package com.aa.sportstree.sportstree;
 
 import android.app.Activity;
 import android.app.ListFragment;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -118,9 +120,9 @@ public class NewsFeedItemFragment extends ListFragment implements AbsListView.On
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if (null != mListener) {
-
-
-
+            NewsItem myItem = (NewsItem) mAdapter.getItem(position);
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(myItem.getUrl()));
+            startActivity(browserIntent);
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
 //            mListener.onFragmentInteraction(DummyContent.ITEMS.get(position).id);
