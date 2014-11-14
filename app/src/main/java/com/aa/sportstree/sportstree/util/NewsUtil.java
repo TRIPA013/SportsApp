@@ -28,6 +28,7 @@ public class NewsUtil {
 
     public static String getContent(String query){
         String content="Please Wait...Loading Content..";
+        VolleyUtil.getContentFromFaroo(query);
         return content;
     }
 }

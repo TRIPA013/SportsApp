@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.aa.sportstree.sportstree.dummy.DataInitializer;
+import com.aa.sportstree.sportstree.util.VolleyUtil;
 
 
 public class MainActivity extends Activity implements SelectionFragment.OnFragmentInteractionListener {
@@ -20,6 +21,7 @@ public class MainActivity extends Activity implements SelectionFragment.OnFragme
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.e(TAG, "+++ In onCreate() +++");
+        VolleyUtil.initializeVolley(this);
         try {
             DataInitializer.initializeAllSports(getBaseContext());
         }
