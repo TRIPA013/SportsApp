@@ -80,12 +80,12 @@ public class SelectionFragment extends Fragment implements AbsListView.OnItemCli
             mAdapter = new ArrayAdapter<Sport>(getActivity(),
                     android.R.layout.simple_list_item_1, android.R.id.text1,DataInitializer.sports);
 
-            if(DataInitializer.selectedSports!=null){
-                for(Sport sport: DataInitializer.selectedSports){
-                    int position =((ArrayAdapter<Sport>)mAdapter).getPosition(sport);
-                    itemIsSelected.put(position,true);
-                }
-            }
+//            if(DataInitializer.selectedSports!=null){
+//                for(Sport sport: DataInitializer.selectedSports){
+//                    int position =((ArrayAdapter<Sport>)mAdapter).getPosition(sport);
+//                    itemIsSelected.put(position,true);
+//                }
+//            }
 
         }
         else {
@@ -105,6 +105,7 @@ public class SelectionFragment extends Fragment implements AbsListView.OnItemCli
 
         // Set OnItemClickListener so we can be notified on item clicks
         mListView.setOnItemClickListener(this);
+
         TextView btn=(TextView)view.findViewById(R.id.continueButton);
         btn.setOnClickListener(new View.OnClickListener() {
 
@@ -140,9 +141,12 @@ public class SelectionFragment extends Fragment implements AbsListView.OnItemCli
         return view;
     }
 
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+
+        itemIsSelected.clear();
         try {
             mListener = (OnFragmentInteractionListener) activity;
         } catch (ClassCastException e) {
@@ -154,6 +158,7 @@ public class SelectionFragment extends Fragment implements AbsListView.OnItemCli
     @Override
     public void onDetach() {
         super.onDetach();
+        itemIsSelected.clear();
         mListener = null;
     }
 

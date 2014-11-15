@@ -35,7 +35,8 @@ public class VolleyUtil {
 
     public static void getContentFromFaroo(final NewsItem newsItem, String query, final NewsFeedItemFragment mAdapter) {
 
-        String url = ApplicationConstants.URL.replace(ApplicationConstants.QUES,query.replace(" ","+"));
+        String compatibleQuery = (query.replace(" ","+")).replace(".","");
+        String url = ApplicationConstants.URL.replace(ApplicationConstants.QUES,compatibleQuery);
         JsonObjectRequest jsonObjectRequest =
                 new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
 
