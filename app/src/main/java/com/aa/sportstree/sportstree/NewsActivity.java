@@ -26,8 +26,10 @@ public class NewsActivity extends Activity implements NewsFeedItemFragment.OnFra
                     .commit();
         }
     }
-
-
+    @Override
+    public void onBackPressed() {
+        // do nothing, so the onBackPressed button does not work.
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
