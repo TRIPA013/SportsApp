@@ -29,7 +29,7 @@ import java.util.List;
  * Activities containing this fragment MUST implement the {@link }
  * interface.
  */
-public class NewsFeedItemFragment extends ListFragment implements AbsListView.OnItemClickListener {
+public class NewsFeedItemFragment extends Fragment implements AbsListView.OnItemClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -82,7 +82,7 @@ public class NewsFeedItemFragment extends ListFragment implements AbsListView.On
         List<NewsItem> newsItems=NewsUtil.getNewsList(this);
         mAdapter = new ArrayAdapter<NewsItem>(getActivity(), R.layout.row,
                 R.id.text2, newsItems);
-        setListAdapter(mAdapter);
+
     }
 
     @Override

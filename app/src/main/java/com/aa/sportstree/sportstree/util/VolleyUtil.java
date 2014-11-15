@@ -63,6 +63,7 @@ public class VolleyUtil {
             String newsURL = jsonObject.getString("url");
             String imageURL = jsonObject.getString("iurl");
             newsItem.setContent(title);
+            newsItem.setUrl(newsURL);
             ((ArrayAdapter)mAdapter.mAdapter).notifyDataSetChanged();
 
         } catch (JSONException e) {

@@ -75,9 +75,6 @@ public class SelectionFragment extends Fragment implements AbsListView.OnItemCli
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-
         // TODO: Change Adapter to display your content
         if(getArguments().getInt(ApplicationConstants.FRAGMENT_TYPE)==SelectionType.Sports.getValue()){
             mAdapter = new ArrayAdapter<Sport>(getActivity(),
@@ -86,7 +83,6 @@ public class SelectionFragment extends Fragment implements AbsListView.OnItemCli
             if(DataInitializer.selectedSports!=null){
                 for(Sport sport: DataInitializer.selectedSports){
                     int position =((ArrayAdapter<Sport>)mAdapter).getPosition(sport);
-
                     itemIsSelected.put(position,true);
                 }
             }
@@ -109,9 +105,6 @@ public class SelectionFragment extends Fragment implements AbsListView.OnItemCli
 
         // Set OnItemClickListener so we can be notified on item clicks
         mListView.setOnItemClickListener(this);
-
-
-
         TextView btn=(TextView)view.findViewById(R.id.continueButton);
         btn.setOnClickListener(new View.OnClickListener() {
 
@@ -172,9 +165,6 @@ public class SelectionFragment extends Fragment implements AbsListView.OnItemCli
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if (null != mListener) {
-            // Notify the active callbacks interface (the activity, if the
-            // fragment is attached to one) that an item has been selected.
-            //mListener.onFragmentInteraction(DummyContent.ITEMS.get(position).id);
             if (itemIsSelected.containsKey(position)) {
                 if (!itemIsSelected.get(position)) {
                     Drawable drawable = view.getResources().getDrawable(R.drawable.abc_ab_solid_light_holo);

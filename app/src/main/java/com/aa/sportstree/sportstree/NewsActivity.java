@@ -19,6 +19,7 @@ public class NewsActivity extends Activity implements NewsFeedItemFragment.OnFra
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
+        setTitle("News Feed");
         if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
                     .add(R.id.container, new NewsFeedItemFragment())
