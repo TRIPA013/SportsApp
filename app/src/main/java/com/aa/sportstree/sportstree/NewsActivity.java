@@ -48,6 +48,10 @@ public class NewsActivity extends Activity implements NewsFeedItemFragment.OnFra
             Intent intent = new Intent(this, PreferenceActivity.class);
             startActivity(intent);
             return true;
+        }else if(id== R.id.refresh){
+            Intent intent = new Intent(this, NewsActivity.class);
+            startActivity(intent);
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
