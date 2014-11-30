@@ -1,5 +1,9 @@
 package com.aa.sportstree.sportstree.util;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
 import com.aa.sportstree.sportstree.NewsFeedItemFragment;
 import com.aa.sportstree.sportstree.data.DataInitializer;
 import com.aa.sportstree.sportstree.pojos.NewsItem;

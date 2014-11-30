@@ -3,7 +3,10 @@ package com.aa.sportstree.sportstree;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -11,7 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
-
+import android.widget.Toast;
 
 
 public class NewsActivity extends Activity implements NewsFeedItemFragment.OnFragmentInteractionListener{
@@ -21,12 +24,26 @@ public class NewsActivity extends Activity implements NewsFeedItemFragment.OnFra
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
         setTitle("News Feed");
-        if (savedInstanceState == null) {
-            getFragmentManager().beginTransaction()
-                    .add(R.id.container, new NewsFeedItemFragment())
-                    .commit();
+        if(isNetworkAvailable()) {
+            if (savedInstanceState == null) {
+                getFragmentManager().beginTransaction()
+                        .add(R.id.container, new NewsFeedItemFragment())
+                        .commit();
+            }
+        }else{
+            Toast.makeText(getApplicationContext(), "No internet connectivity. Refresh. ",
+                    Toast.LENGTH_LONG).show();
         }
     }
+
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
     @Override
     public void onBackPressed() {
         // do nothing, so the onBackPressed button does not work.

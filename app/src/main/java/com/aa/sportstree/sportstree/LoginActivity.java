@@ -29,6 +29,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.aa.sportstree.sportstree.data.DataInitializer;
+import com.aa.sportstree.sportstree.pojos.Team;
 import com.aa.sportstree.sportstree.util.FileUtil;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -227,14 +228,13 @@ public class LoginActivity extends PlusBaseActivity implements LoaderCallbacks<C
     @Override
     protected void onPlusClientSignIn() {
         Log.d(TAG, "+++ Sign in Successful +++");
-
-        if(FileUtil.getTeams(this)==null) {
+        List<Team> teams = FileUtil.getTeams(this);
+        if(teams==null) {
             Intent intent = new Intent(this, PreferenceActivity.class);
             startActivity(intent);
         }
         else{
-            DataInitializer.setSelectedTeams(FileUtil.getTeams(this));
-
+            DataInitializer.setSelectedTeams(teams);
             Intent intent = new Intent(this, NewsActivity.class);
             startActivity(intent);
 

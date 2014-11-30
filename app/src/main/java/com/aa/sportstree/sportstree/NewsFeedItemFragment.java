@@ -2,7 +2,10 @@ package com.aa.sportstree.sportstree;
 
 import android.app.Activity;
 import android.app.ListFragment;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -78,6 +81,7 @@ public class NewsFeedItemFragment extends Fragment implements AbsListView.OnItem
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
 
         List<NewsItem> newsItems=NewsUtil.getNewsList(this);
         mAdapter = new ArrayAdapter<NewsItem>(getActivity(), R.layout.row,
