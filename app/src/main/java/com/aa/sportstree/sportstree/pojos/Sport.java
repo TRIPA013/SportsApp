@@ -1,18 +1,19 @@
 package com.aa.sportstree.sportstree.pojos;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by Abhinav on 11/9/2014.
  */
-public class Sport {
+public class Sport implements Serializable {
 
 
     private String id;
 
     private String name;
 
-    private List<Team> teams;
+    transient private List<Team> teams;
 
 
     public Sport(String id, String name, List<Team> teams) {

@@ -1,10 +1,12 @@
 package com.aa.sportstree.sportstree.pojos;
+import com.google.gson.annotations.Expose;
+
 import java.io.*;
 import java.util.*;
 /**
  * Created by Abhinav on 11/9/2014.
  */
-public class Team {
+public class Team implements Serializable{
     private Sport sport;
     private String teamName;
     private String teamId; // every team has an id

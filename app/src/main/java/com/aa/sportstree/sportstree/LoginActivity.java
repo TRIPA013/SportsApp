@@ -17,6 +17,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -26,6 +27,9 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.aa.sportstree.sportstree.data.DataInitializer;
+import com.aa.sportstree.sportstree.util.FileUtil;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.SignInButton;
@@ -42,6 +46,7 @@ import java.util.List;
  * and follow the steps in "Step 1" to create an OAuth 2.0 client for your package.
  */
 public class LoginActivity extends PlusBaseActivity implements LoaderCallbacks<Cursor>{
+    private final String TAG = ((Object) this).getClass().getSimpleName();
 
     /**
      * A dummy authentication store containing known user names and passwords.
@@ -221,9 +226,19 @@ public class LoginActivity extends PlusBaseActivity implements LoaderCallbacks<C
 
     @Override
     protected void onPlusClientSignIn() {
+        Log.d(TAG, "+++ Sign in Successful +++");
 
-        Intent intent = new Intent(this, PreferenceActivity.class);
-        startActivity(intent);
+        if(FileUtil.getTeams(this)==null) {
+            Intent intent = new Intent(this, PreferenceActivity.class);
+            startActivity(intent);
+        }
+        else{
+            DataInitializer.setSelectedTeams(FileUtil.getTeams(this));
+
+            Intent intent = new Intent(this, NewsActivity.class);
+            startActivity(intent);
+
+        }
 
         //Set up sign out and disconnect buttons.
 //        Button signOutButton = (Button) findViewById(R.id.plus_sign_out_button);

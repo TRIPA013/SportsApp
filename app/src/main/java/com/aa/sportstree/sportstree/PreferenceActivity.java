@@ -6,6 +6,7 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,6 +19,8 @@ import com.aa.sportstree.sportstree.pojos.SelectionType;
 
 
 public class PreferenceActivity extends Activity implements SelectionFragment.OnFragmentInteractionListener{
+    private final String TAG = ((Object) this).getClass().getSimpleName();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +28,8 @@ public class PreferenceActivity extends Activity implements SelectionFragment.On
         setContentView(R.layout.activity_preference);
         setTitle("Preferences");
         if (savedInstanceState == null) {
+            Log.d(TAG, "+++ In Preferences for Sports+++");
+
             getFragmentManager().beginTransaction()
                     .add(R.id.container, getFragmentInstance(SelectionType.Sports))
                     .commit();
@@ -83,10 +88,16 @@ public class PreferenceActivity extends Activity implements SelectionFragment.On
     public void onContinueClicked(SelectionType selectionType){
         switch(selectionType){
             case Teams:
+
+                Log.d(TAG, "+++ Starting to display News+++");
+
                 Intent intent = new Intent(this, NewsActivity.class);
                 startActivity(intent);
                 break;
             case Sports:
+
+                Log.d(TAG, "+++ In Preferences for Teams+++");
+
                 Fragment newFragment = getFragmentInstance(SelectionType.Teams);
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.container, newFragment);

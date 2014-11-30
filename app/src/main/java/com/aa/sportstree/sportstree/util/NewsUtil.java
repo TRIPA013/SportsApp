@@ -1,9 +1,7 @@
 package com.aa.sportstree.sportstree.util;
 
-import android.widget.ListAdapter;
-
 import com.aa.sportstree.sportstree.NewsFeedItemFragment;
-import com.aa.sportstree.sportstree.dummy.DataInitializer;
+import com.aa.sportstree.sportstree.data.DataInitializer;
 import com.aa.sportstree.sportstree.pojos.NewsItem;
 import com.aa.sportstree.sportstree.pojos.Team;
 

@@ -1,4 +1,4 @@
-package com.aa.sportstree.sportstree.dummy;
+package com.aa.sportstree.sportstree.data;
 
 import android.content.Context;
 import android.content.res.AssetManager;
@@ -7,12 +7,9 @@ import com.aa.sportstree.sportstree.pojos.Sport;
 import com.aa.sportstree.sportstree.pojos.Team;
 import com.aa.sportstree.sportstree.util.FileUtil;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Abhinav on 11/10/2014.
@@ -34,6 +31,11 @@ public class DataInitializer {
         for(Sport sport: selectedSports){
             teams.addAll(sport.getTeams());
         }
+    }
+
+    public static void setSelectedTeams(Context context,List<Team> teams){
+        setSelectedTeams(teams);
+        FileUtil.storeSharedPreferences(context,selectedTeams);
     }
 
     public static void setSelectedTeams(List<Team> teams){

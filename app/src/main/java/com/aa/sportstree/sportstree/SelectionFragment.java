@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 
 import com.aa.sportstree.sportstree.constants.ApplicationConstants;
-import com.aa.sportstree.sportstree.dummy.DataInitializer;
+import com.aa.sportstree.sportstree.data.DataInitializer;
 import com.aa.sportstree.sportstree.pojos.SelectionType;
 import com.aa.sportstree.sportstree.pojos.Sport;
 import com.aa.sportstree.sportstree.pojos.Team;
@@ -112,7 +112,7 @@ public class SelectionFragment extends Fragment implements AbsListView.OnItemCli
             @Override
             public void onClick(View v) {
                 if(getArguments().getInt(ApplicationConstants.FRAGMENT_TYPE)==SelectionType.Sports.getValue()){
-                    List<Sport> selectedSports = new ArrayList<Sport>();
+                    ArrayList<Sport> selectedSports = new ArrayList<Sport>();
                     for(Map.Entry<Integer,Boolean> entry: itemIsSelected.entrySet()) {
                         if(entry.getValue()) {
                             Sport sport =(Sport) mAdapter.getItem(entry.getKey());
@@ -131,7 +131,7 @@ public class SelectionFragment extends Fragment implements AbsListView.OnItemCli
                             selectedTeams.add(team);
                         }
                     }
-                    DataInitializer.setSelectedTeams(selectedTeams);
+                    DataInitializer.setSelectedTeams(getActivity().getBaseContext(),selectedTeams);
                     ((PreferenceActivity)getActivity()).onContinueClicked(SelectionType.Teams);
 
                 }
