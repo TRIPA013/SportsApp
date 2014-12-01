@@ -18,10 +18,17 @@ import com.aa.sportstree.sportstree.constants.ApplicationConstants;
 import com.aa.sportstree.sportstree.pojos.SelectionType;
 
 
+/**
+ * This class handles picking each users favorite sports
+ */
 public class PreferenceActivity extends Activity implements SelectionFragment.OnFragmentInteractionListener{
     private final String TAG = ((Object) this).getClass().getSimpleName();
 
 
+    /**
+     * Handles the creation and saving of user preferences of sports.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +43,12 @@ public class PreferenceActivity extends Activity implements SelectionFragment.On
         }
     }
 
+    /**
+     * This will check what fragment of preferences have been selected, and return them to the
+     * application
+     * @param selectionType the selected type of sport
+     * @return
+     */
     private Fragment getFragmentInstance(SelectionType selectionType) {
         SelectionFragment selectionFragment = new SelectionFragment();
         Bundle bundle = new Bundle();
@@ -85,6 +98,11 @@ public class PreferenceActivity extends Activity implements SelectionFragment.On
         }
     }
 
+    /**
+     * This method is the logic for what activity to occur depending on if the user is on the teams
+     * fragment or sports fragment.
+     * @param selectionType the type chosen by the user.
+     */
     public void onContinueClicked(SelectionType selectionType){
         switch(selectionType){
             case Teams:

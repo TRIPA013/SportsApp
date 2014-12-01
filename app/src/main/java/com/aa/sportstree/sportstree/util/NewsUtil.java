@@ -16,7 +16,13 @@ import java.util.List;
  * Created by Abhinav on 11/14/2014.
  */
 public class NewsUtil {
-
+    /**
+     * This is the method for when a news item displays, it only shows a display message if the news
+     * item has not been retrieved yet. As it grabs the item, the message is replaced with the
+     * news item.
+     * @param mAdapter the fragment news item
+     * @return the list of items for the news feed
+     */
     public static List<NewsItem> getNewsList(NewsFeedItemFragment mAdapter){
         List<NewsItem> newsItems = new ArrayList<NewsItem>();
         List<Team> teams =DataInitializer.selectedTeams;
@@ -32,6 +38,14 @@ public class NewsUtil {
         return newsItems;
     }
 
+    /**
+     * This method uses our google volley servie to return the content of the story for browser
+     * purposes.
+     * @param newsItem the news feed item
+     * @param query the string of the faroo query
+     * @param mAdapter the fragment news item
+     * @return
+     */
     public static String getContent(NewsItem newsItem,String query, NewsFeedItemFragment mAdapter){
         String content="Please Wait...Loading Content..";
         VolleyUtil.getContentFromFaroo(newsItem,query, mAdapter);

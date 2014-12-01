@@ -49,10 +49,7 @@ import java.util.List;
 public class LoginActivity extends PlusBaseActivity implements LoaderCallbacks<Cursor>{
     private final String TAG = ((Object) this).getClass().getSimpleName();
 
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
+   // the dummy credentials
     private static final String[] DUMMY_CREDENTIALS = new String[]{
             "foo@example.com:hello", "bar@example.com:world"
     };
@@ -70,6 +67,11 @@ public class LoginActivity extends PlusBaseActivity implements LoaderCallbacks<C
     private View mSignOutButtons;
     private View mLoginFormView;
 
+    /**
+     * We begin the android application, where it specifically uses the Google+ sign in.
+     * Afterwards, we can proceed with the rest of the application.
+     * @param savedInstanceState the saved state for persistence purposes
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,6 +124,9 @@ public class LoginActivity extends PlusBaseActivity implements LoaderCallbacks<C
         mSignOutButtons = findViewById(R.id.plus_sign_out_buttons);
     }
 
+    /**
+     * Populate the screen
+     */
     private void populateAutoComplete() {
         getLoaderManager().initLoader(0, null, this);
     }
@@ -225,6 +230,11 @@ public class LoginActivity extends PlusBaseActivity implements LoaderCallbacks<C
         }
     }
 
+    /**
+     * This method signs the client using our application in. Afterwards, an intent starts
+     * the next activity in our application. After the sign in is successful, it goes to the
+     * preference activity if the shared preferences doesn't find any teams.
+     */
     @Override
     protected void onPlusClientSignIn() {
         Log.d(TAG, "+++ Sign in Successful +++");
@@ -263,6 +273,10 @@ public class LoginActivity extends PlusBaseActivity implements LoaderCallbacks<C
         showProgress(show);
     }
 
+    /**
+     * Here we update after sign in is successful and removes the sign in button afterwards, only
+     * if the connection is successful via the boolean connected object.
+     */
     @Override
     protected void updateConnectButtonState() {
         //TODO: Update this logic to also handle the user logged in by email.
@@ -295,6 +309,12 @@ public class LoginActivity extends PlusBaseActivity implements LoaderCallbacks<C
                 ConnectionResult.SUCCESS;
     }
 
+    /**
+     * This method loads the user profile.
+     * @param i
+     * @param bundle
+     * @return
+     */
     @Override
     public Loader<Cursor> onCreateLoader(int i, Bundle bundle) {
         return new CursorLoader(this,
@@ -312,6 +332,12 @@ public class LoginActivity extends PlusBaseActivity implements LoaderCallbacks<C
                 ContactsContract.Contacts.Data.IS_PRIMARY + " DESC");
     }
 
+    /**
+     * After the loading of the lists, this method handles if there is any more items to be
+     * loaded. The cursor just moves to each item until the end.
+     * @param cursorLoader the helper function to help load the cursor
+     * @param cursor the current item
+     */
     @Override
     public void onLoadFinished(Loader<Cursor> cursorLoader, Cursor cursor) {
         List<String> emails = new ArrayList<String>();
@@ -339,7 +365,11 @@ public class LoginActivity extends PlusBaseActivity implements LoaderCallbacks<C
         int IS_PRIMARY = 1;
     }
 
-
+    /**
+     * This method takes the list and makes an adapter to help for accessing each view
+     * appropriately.
+     * @param emailAddressCollection the list of emails.
+     */
     private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
         //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
         ArrayAdapter<String> adapter =
@@ -363,6 +393,11 @@ public class LoginActivity extends PlusBaseActivity implements LoaderCallbacks<C
             mPassword = password;
         }
 
+        /**
+         * A background task for checking for account existing in the application.
+         * @param params
+         * @return
+         */
         @Override
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
@@ -386,6 +421,10 @@ public class LoginActivity extends PlusBaseActivity implements LoaderCallbacks<C
             return true;
         }
 
+        /**
+         * Helper function to handle login success or errors.
+         * @param success the check if log in was successful
+         */
         @Override
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
@@ -399,6 +438,9 @@ public class LoginActivity extends PlusBaseActivity implements LoaderCallbacks<C
             }
         }
 
+        /**
+         * Helper function to check if the login was not done.
+         */
         @Override
         protected void onCancelled() {
             mAuthTask = null;

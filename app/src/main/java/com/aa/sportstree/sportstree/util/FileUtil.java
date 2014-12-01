@@ -26,6 +26,11 @@ import com.google.gson.GsonBuilder;
 /**
  * Created by Abhinav on 11/10/2014.
  */
+
+/**
+ * This class is a helper function to read in all of the files using some file reading logic.
+ * It accesses the input stream to do this.
+ */
 public class FileUtil {
     public static List<String> getTeams(InputStream input) {
         List<String> teams = new ArrayList<String>();
@@ -41,7 +46,14 @@ public class FileUtil {
         return teams;
     }
 
+    /**
+     * This method handles shared preferences and storing persistent data storage
+     * for our application.
+     * @param context the context of the application
+     * @param teams the list of teams currently selected
+     */
     public static void storeSharedPreferences(Context context, List<Team> teams) {
+
        try {
            SharedPreferences mPrefs = context.getSharedPreferences("preferences", Context.MODE_PRIVATE);
            UserSelection userSelection = new UserSelection(teams);
@@ -56,7 +68,13 @@ public class FileUtil {
        }
     }
 
-
+    /**
+     * This method, with it's cohesive name, does the handling of what object
+     * is selected by the clicking of the user. It utilizes the preferences chosen previously from
+     * our appropriate getSharedPreferences method.
+     * @param context the context of the application
+     * @return the user selection of items
+     */
     public static UserSelection getUserSelection(Context context) {
         SharedPreferences mPrefs = context.getSharedPreferences("preferences", Context.MODE_PRIVATE);
         UserSelection userSelection = null;
@@ -71,6 +89,12 @@ public class FileUtil {
         return userSelection;
     }
 
+    /**
+     * This method takes the selections from previous methods, and
+     * takes the context of the application. Afterwards, the list is returned to the caller.
+     * @param context the context of the application
+     * @return the user selected teams
+     */
     public static List<Team> getTeams(Context context) {
         UserSelection userSelection = getUserSelection(context);
         if(userSelection==null){

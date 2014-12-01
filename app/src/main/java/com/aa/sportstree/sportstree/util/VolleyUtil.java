@@ -27,12 +27,20 @@ public class VolleyUtil {
 
     public static RequestQueue requestQueue;
 
+    // create our volley request
     public static void initializeVolley(Context context) {
         if(requestQueue==null) {
             requestQueue = Volley.newRequestQueue(context);
         }
     }
 
+    /**
+     * This method replaces the query issue of the space with a + sign so that the query can be
+     * handled by our browsers and json.
+     * @param newsItem the current news feed item and article
+     * @param query the article to be accessed
+     * @param mAdapter the news feed fragment
+     */
     public static void getContentFromFaroo(final NewsItem newsItem, String query, final NewsFeedItemFragment mAdapter) {
 
         String compatibleQuery = (query.replace(" ","+")).replace(".","");
@@ -55,7 +63,13 @@ public class VolleyUtil {
 
     }
 
-
+    /**
+     * This method grabs the news item from json, and uses an mAdapter to handle the conversions.
+     * @param newsItem the current news item to display
+     * @param response the json object that will be converted into a gson object
+     * @param mAdapter the news feed fragment
+     * @return null, because we don't return anything
+     */
     public static NewsItem getNewsItemFromJSONResponse(NewsItem newsItem, JSONObject response, NewsFeedItemFragment mAdapter){
         try {
             String result =response.getString("results");
