@@ -24,7 +24,7 @@ import com.aa.sportstree.sportstree.util.NewsUtil;
 import java.util.List;
 
 /**
- * A fragment representing a list of Items.
+ * A fragment representing a list of News Items.
  * <p />
  * Large screen devices (such as tablets) are supported by replacing the ListView
  * with a GridView.
@@ -34,14 +34,6 @@ import java.util.List;
  */
 public class NewsFeedItemFragment extends Fragment implements AbsListView.OnItemClickListener {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
@@ -60,8 +52,6 @@ public class NewsFeedItemFragment extends Fragment implements AbsListView.OnItem
     public static NewsFeedItemFragment newInstance(String param1, String param2) {
         NewsFeedItemFragment fragment = new NewsFeedItemFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -76,12 +66,6 @@ public class NewsFeedItemFragment extends Fragment implements AbsListView.OnItem
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-
 
         List<NewsItem> newsItems=NewsUtil.getNewsList(this);
         mAdapter = new ArrayAdapter<NewsItem>(getActivity(), R.layout.row,
@@ -120,16 +104,19 @@ public class NewsFeedItemFragment extends Fragment implements AbsListView.OnItem
         mListener = null;
     }
 
-
+    /**
+     * On clicking on an item, open it in a browser.
+     * @param parent Parent adapter view.
+     * @param view Current view.
+     * @param position Position of clicked item.
+     * @param id id of clicked item.
+     */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if (null != mListener) {
             NewsItem myItem = (NewsItem) mAdapter.getItem(position);
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(myItem.getUrl()));
             startActivity(browserIntent);
-            // Notify the active callbacks interface (the activity, if the
-            // fragment is attached to one) that an item has been selected.
-//            mListener.onFragmentInteraction(DummyContent.ITEMS.get(position).id);
         }
     }
 

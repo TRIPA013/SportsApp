@@ -9,8 +9,11 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A helper class for managing, creating and updating database.
+ */
 public class DatabaseHelper {
-    private static final String DATABASE_NAME = "TicTacToe.db";
+    private static final String DATABASE_NAME = "SportsTree.db";
     private static final int DATABASE_VERSION = 1;
     private static final String TABLE_NAME = "Accounts";
     private Context context;

@@ -16,7 +16,9 @@ import android.view.ViewGroup;
 import android.os.Build;
 import android.widget.Toast;
 
-
+/**
+ * An activity that handles news item fetching and display.
+ */
 public class NewsActivity extends Activity implements NewsFeedItemFragment.OnFragmentInteractionListener{
 
     @Override
@@ -24,6 +26,7 @@ public class NewsActivity extends Activity implements NewsFeedItemFragment.OnFra
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
         setTitle("News Feed");
+        //check if internet network is available or not.
         if(isNetworkAvailable()) {
             if (savedInstanceState == null) {
                 getFragmentManager().beginTransaction()
@@ -31,12 +34,16 @@ public class NewsActivity extends Activity implements NewsFeedItemFragment.OnFra
                         .commit();
             }
         }else{
+            //Displaying appropriate message in case of no internet connectivity.
             Toast.makeText(getApplicationContext(), "No internet connectivity. Refresh. ",
                     Toast.LENGTH_LONG).show();
         }
     }
 
-
+    /**
+     * A method that checks if there is internet connection available.
+     * @return true if internet connection is available, else false.
+     */
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager
                 = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -44,6 +51,9 @@ public class NewsActivity extends Activity implements NewsFeedItemFragment.OnFra
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
+    /**
+     * Preventing the default back action on the news activity page.
+     */
     @Override
     public void onBackPressed() {
         // do nothing, so the onBackPressed button does not work.
@@ -62,10 +72,12 @@ public class NewsActivity extends Activity implements NewsFeedItemFragment.OnFra
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
+            //Start preference activity
             Intent intent = new Intent(this, PreferenceActivity.class);
             startActivity(intent);
             return true;
         }else if(id== R.id.refresh){
+            //Restart the current activity to allow for refreshed news to be displayed.
             Intent intent = new Intent(this, NewsActivity.class);
             startActivity(intent);
             return true;

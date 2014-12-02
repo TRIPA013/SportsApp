@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * A fragment representing a list of Items.
+ * A fragment representing a list of preference items.
  * <p/>
  * Large screen devices (such as tablets) are supported by replacing the ListView
  * with a GridView.
@@ -39,12 +39,6 @@ import java.util.Map;
 public class SelectionFragment extends Fragment implements AbsListView.OnItemClickListener {
 
     private SelectionType selectionType;
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
 
     private OnFragmentInteractionListener mListener;
 
@@ -59,7 +53,6 @@ public class SelectionFragment extends Fragment implements AbsListView.OnItemCli
      */
     private ListAdapter mAdapter;
 
-    // TODO: Rename and change types of parameters
     public static SelectionFragment newInstance(String param1, String param2) {
         SelectionFragment fragment = new SelectionFragment();
         return fragment;
@@ -75,8 +68,9 @@ public class SelectionFragment extends Fragment implements AbsListView.OnItemCli
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // TODO: Change Adapter to display your content
+        //Check if fragment type is Sports and populating array adapter accordingly.
         if(getArguments().getInt(ApplicationConstants.FRAGMENT_TYPE)==SelectionType.Sports.getValue()){
+            //populate list of sports.
             mAdapter = new ArrayAdapter<Sport>(getActivity(),
                     android.R.layout.simple_list_item_1, android.R.id.text1,DataInitializer.sports);
 
@@ -89,6 +83,7 @@ public class SelectionFragment extends Fragment implements AbsListView.OnItemCli
 
         }
         else {
+            //Populate the list of teams.
             mAdapter = new ArrayAdapter<Team>(getActivity(),
                     android.R.layout.simple_list_item_1, android.R.id.text1, DataInitializer.teams);
         }
@@ -113,6 +108,7 @@ public class SelectionFragment extends Fragment implements AbsListView.OnItemCli
             public void onClick(View v) {
                 if(getArguments().getInt(ApplicationConstants.FRAGMENT_TYPE)==SelectionType.Sports.getValue()){
                     ArrayList<Sport> selectedSports = new ArrayList<Sport>();
+                    //Add selected sports to sports list.
                     for(Map.Entry<Integer,Boolean> entry: itemIsSelected.entrySet()) {
                         if(entry.getValue()) {
                             Sport sport =(Sport) mAdapter.getItem(entry.getKey());
@@ -125,6 +121,7 @@ public class SelectionFragment extends Fragment implements AbsListView.OnItemCli
                 else {
 
                     List<Team> selectedTeams = new ArrayList<Team>();
+                    //Add selected teams to team list.
                     for(Map.Entry<Integer,Boolean> entry: itemIsSelected.entrySet()) {
                         if(entry.getValue()) {
                             Team team =(Team) mAdapter.getItem(entry.getKey());
@@ -145,7 +142,7 @@ public class SelectionFragment extends Fragment implements AbsListView.OnItemCli
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-
+        //clear previous selections on fragment.
         itemIsSelected.clear();
         try {
             mListener = (OnFragmentInteractionListener) activity;
@@ -166,6 +163,13 @@ public class SelectionFragment extends Fragment implements AbsListView.OnItemCli
 
     Map<Integer, Boolean> itemIsSelected = new HashMap<Integer, Boolean>();
 
+    /**
+     * A method that keeps track whenever an item is selected and also updates the UI accordingly.
+     * @param parent Parent adapter view.
+     * @param view Current view.
+     * @param position Position of clicked item.
+     * @param id id of clicked item.
+     */
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
